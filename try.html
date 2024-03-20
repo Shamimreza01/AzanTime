@@ -1,0 +1,101 @@
+<!-- example-->
+<!--
+<html>
+<head>
+<title>Automatic Alarm Sound Example</title>
+</head>
+<body>
+
+<audio id="alarmSound" src="azan1.mp3"></audio> 
+
+<script>
+// Set the alarm time to 7:00 AM (or any other time you wish)
+var alarmTime = new Date();
+alarmTime.setHours(21, 0, 0); // 24-hour format
+alarmTime.setMinutes(28,0,0);
+// Function to check the current time against the alarm time
+function checkAlarm() {
+  var currentTime = new Date();
+  // Compare hours and minutes
+  if (currentTime.getHours() === alarmTime.getHours() && currentTime.getMinutes() === alarmTime.getMinutes()) {
+    document.getElementById('alarmSound').play();
+    console.log("i am here")
+  }
+}
+
+// Set an interval to check the time every minute
+setInterval(checkAlarm, 60000);
+</script>
+
+</body>
+</html>
+-->
+<!-- <!DOCTYPE html>
+<html>
+<body>
+<audio id="alarmSound" src="azan1.mp3"></audio> 
+<h2>JavaScript Geolocation API</h2>
+<script src="script.js"></script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>Timed YouTube Video Display</title>
+</head>
+<body>
+
+<!-- Initially hide the YouTube video iframe using inline CSS -->
+<div id="player" style="display: none;"></div>
+
+<script>
+  // Load the IFrame Player API code asynchronously.
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  // This function creates an <iframe> (and YouTube player) after the API code downloads.
+  var player;
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      height: '390',
+      width: '640',
+      videoId: 'hq9rIT1g5f8', // Replace with your video ID
+      playerVars: {
+        'autoplay': 1, // Autoplay the video
+        'controls': 1, // Show pause/play buttons in player
+      },
+      events: {
+        'onReady': onPlayerReady,
+      }
+    });
+  }
+
+  // The API will call this function when the video player is ready.
+  function onPlayerReady(event) {
+    // Set the alarm time to 19:00 PM (or any other time you wish)
+    var alarmTime = new Date();
+    alarmTime.setHours(0, 0, 0); // 24-hour format
+    alarmTime.setMinutes(44, 0, 0); 
+    // Function to check the current time against the alarm time
+    function checkAlarm() {
+      var currentTime = new Date();
+      var playerElement = document.getElementById('player');
+      // Compare hours and minutes
+      if (currentTime.getHours() === alarmTime.getHours() && currentTime.getMinutes() === alarmTime.getMinutes()) {
+        playerElement.style.display = 'block'; // Show the player
+        player.playVideo();
+      } else {
+        playerElement.style.display = 'none'; 
+        player.stopVideo();// Hide the player
+      }
+    }
+
+    // Set an interval to check the time every second
+    setInterval(checkAlarm, 1000);
+  }
+</script>
+
+</body>
+</html>
