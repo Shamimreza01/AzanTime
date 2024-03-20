@@ -68,3 +68,18 @@ h3{
     width: 100%;
     background-size: cover;
   }
+
+
+  @media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+    .msg1{
+        width: 90%;
+    }
+    .striming{
+        width: 97%;
+        aspect-ratio: 16 / 9; 
+        height: calc(97vw * 9 / 16);
+    }
+  }
