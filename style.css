@@ -24,6 +24,7 @@
 }
 .msg1 h2{
     font-size: 1.2rem;
+    text-align: center;
 }
 h3{
     text-align: center;
@@ -62,7 +63,6 @@ h3{
     height: calc(60vw * 9 / 16); /* Calculate height based on the width */
   }
   .video{
-    display:none;
     border-radius: 20px;
     height:100%;
     width: 100%;
@@ -71,13 +71,24 @@ h3{
 
 
   @media only screen and (max-width: 600px) {
-    body {
-      background-color: lightblue;
-    }
     .msg1{
         width: 90%;
+        top: 20%;
+    }
+    .msg1 h2{
+        font-size: 1rem;
+    }
+    h3{
+        font-size: 0.85rem;
+    }
+    #ifterTime{
+        font-size: 1.15rem;
+    }
+    #remaining{
+        font-size: 1.05rem;
     }
     .striming{
+        top: 35%;
         width: 97%;
         aspect-ratio: 16 / 9; 
         height: calc(97vw * 9 / 16);

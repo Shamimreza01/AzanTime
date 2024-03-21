@@ -2,21 +2,38 @@ let sunRise_sunSetApi = "https://api.sunrisesunset.io/json?";
 let latitude = 0;
 let longitude = 0;
 let ifterTimeDisplay=document.querySelector("#ifterTime");
+let remainingTimeDisplay=  document.querySelector("#remaining");
 
-window.addEventListener('load', () => {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-      await getSunsetTime();
-    }, (error) => {
-      console.error(error);
-      // Handle error gracefully
-    },{ enableHighAccuracy: true });
-  } else {
-    // Handle case where geolocation is not supported
-  }
-});
+// window.addEventListener('load', () => {
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(async (position) => {
+//       latitude = position.coords.latitude;
+//       longitude = position.coords.longitude;
+//       console.log(latitude);
+//       console.log(longitude);
+//       await getSunsetTime();
+//     }, (error) => {
+//       console.error(error);
+//       // Handle error gracefully
+//     },{ enableHighAccuracy: true });
+//   } else {
+//     // Handle case where geolocation is not supported
+//   }
+// });
+
+// let apiURL="http://ip-api.com/json/?fields";
+let apiURL="https://ipinfo.io/json?"
+async function locatin(){
+  let respons= await fetch(apiURL);
+  let data= await respons.json();
+  let loc=data.loc.split(',');
+ latitude=loc[0];
+ longitude=loc[1];
+ console.log(latitude);
+ console.log(longitude)
+ getSunsetTime();
+}
+locatin();
 
 let ifterTime;
 let currentTime;
@@ -60,7 +77,7 @@ function checkAlarm() {
       currentTime.getSeconds() === ifterTime.getSeconds()) {
     document.getElementById('alarmSound').play();
   } 
-  document.querySelector("#remaining").innerHTML=calculateTimeDifference(currentTime,ifterTime);
+remainingTimeDisplay.innerHTML=calculateTimeDifference(currentTime,ifterTime);
 }
 
 function startAlarmCheck() {
@@ -73,23 +90,35 @@ function calculateTimeDifference(startTime, endTime) {
   var end = new Date(endTime);
 
   // Calculate the difference in milliseconds
-  var difference = end - start;
+  let difference=(end-start<0)?start-end:end-start;
 
   // Convert milliseconds into hours, minutes, and seconds
   var hours = Math.floor(difference / 36e5),
       minutes = Math.floor((difference % 36e5) / 60000),
       seconds = Math.floor((difference % 60000) / 1000);
+  if(end-start<0){
+  return hours + '   : ' + minutes + ' : ' + seconds + ' min past';
+  }else{
+    return hours + '   : ' + minutes + ' : ' + seconds;
+  }
 
-  return hours + '   : ' + minutes + ' : ' + seconds + '';
 }
 
-// Example usage:
-var time1 = "Sat Mar 16 2024 19:13:38 GMT-0700 (Pacific Daylight Time)";
-var time2 = "Sun Mar 17 2024 21:47:22 GMT-0700 (Pacific Daylight Time)";
-console.log(calculateTimeDifference(time1, time2));
 
 // for video play:
-let baseUrl="https://www.youtube.com/embed/";
-let currVideo=quranLearn[0];
-let comUrl=`${baseUrl}${currVideo}`;
-document.querySelector(".video").src=comUrl;
+function playVideo(currVideo) {
+  let baseUrl = "https://www.youtube.com/embed/";
+  let comUrl = `${baseUrl}${currVideo}?autoplay=1`;
+  document.querySelector(".video").src = comUrl;
+}
+
+function playVideosSequentially(videos, index = 0) {
+  if (index < videos.length) {
+    playVideo(videos[index]);
+    setTimeout(() => playVideosSequentially(videos, index + 1), 100000);
+  }
+}
+
+// Assuming quranLearn is an array of video IDs
+playVideosSequentially(quranLearn);
+
