@@ -5,7 +5,7 @@
 }
 
 .container{
-    background-image: url("thumb-1920-924669.jpg");
+    background-color: aliceblue;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -13,8 +13,138 @@
     background-position: center;
     position: relative;
 }
+
+.search{
+    display: flex;
+    background: #2f7db3;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.locationDisplay{
+    width: 80%;
+    height: 5vh;
+    border: none;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.location{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: green;
+    background-color: white;
+    height: 5vh;
+    width: 10%;
+    border-left: 1px solid black;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.currentDateTimeContainer{
+   display: flex;
+   justify-content: center;
+}
+.currentDateTime{
+    font-size: 1.2rem;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    background-color:#268176 ;
+    color: white;
+    height: 10vh;
+    width: 95%;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.mainContentContainer{
+    display: flex;
+    justify-content: center;
+}
+.mainContent{
+    display: flex;
+    align-items: center;
+    height:50vh;
+    width:95%;
+    border: 1px solid rgb(120, 22, 38);
+    border-radius: 20px;
+    background-color: white;
+    overflow: hidden;
+}
+.img{
+    background-image: url("sunrise-beach-logo-icon-design-template-free-vector.jpg");
+    height: 45vh;
+    width:40%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-top: 12vh;
+
+}
+.verticle{
+    font-weight: 100;
+    height: 20vh;
+    border: 1px solid black;
+}
+.mainInfo{
+    margin-left: 5%;
+    font-size: 1.3rem;
+}
+.suhoorIfterDisplay{
+    display: flex;
+    justify-content: center;
+}
+.suhoorIfterContainer{
+    margin-top: 2vh;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    background: #268176;
+    height: 10vh;
+    width: 95%;
+    justify-content: space-evenly;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+.bottomNavBarContainer{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-weight: 500;
+    background-color: #2f7db3;
+    color: white;
+    height: 8vh;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+}
+.button{
+    cursor: pointer;
+    color: white;
+  border: none;
+  padding: 2px 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.button:hover{
+    background-color: #1c5a8c;
+    padding: 2px 5px;
+    font-weight: bolder;
+    height:3vh;
+    border-radius: 3px;
+    transform: scale(1.2);
+    transition-duration: 2s;
+}
+
+
+
 .msg1{
-    background-color: aliceblue;
+    background-color: white;
+    border: 0.1px dotted black;
     position: absolute;
     padding: 2vw;
     border-radius: 15px;
@@ -71,6 +201,9 @@ h3{
 
 
   @media only screen and (max-width: 600px) {
+    .img{
+        margin-top:20vh;
+    }
     .msg1{
         width: 90%;
         top: 20%;
