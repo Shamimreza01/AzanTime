@@ -9,6 +9,7 @@ let currentTime;
 if(localStorage.getItem('latitude')!==null && localStorage.getItem('longitude')!==null){
 window.addEventListener('load', function() {
   getAllTime(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
+  getLocationName(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
 });
 }else{
   window.addEventListener('load',()=>{
@@ -19,6 +20,7 @@ window.addEventListener('load', function() {
        localStorage.setItem("latitude",`${latitude}`);
        localStorage.setItem("longitude",`${longitude}`);
        await getAllTime(latitude,longitude);
+       await getLocationName(latitude,longitude);
       },
       (error)=>{
         console.log(error);
@@ -78,6 +80,13 @@ arabicDate=arabicDate.split(',');
 document.querySelector(".arabicDate").textContent=`${arabicDate[1]} ${arabicDate[2]}`;
 }
 
+async function getLocationName(latitude,longitude){
+  let url=`https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&format=json&apiKey=4691c68537bb4dffacaac11c785ac3a0`;
+  let response=await fetch(url);
+  let data= await response.json();
+  console.log(data.results);
+  document.querySelector(".locationDisplay").textContent=`${data.results[0].county}, ${data.results[0].city}  ${data.results[0].address_line1}`;
+}
 
 // Call the function to display the Arabic date in Bangla
 // Call the function to display the Arabic date in Bangla

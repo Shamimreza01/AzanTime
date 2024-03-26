@@ -22,6 +22,7 @@
     padding: 10px;
 }
 .locationDisplay{
+    background-color: white;
     width: 80%;
     height: 5vh;
     border: none;
@@ -66,7 +67,7 @@
 .mainContent{
     display: flex;
     align-items: center;
-    height:50vh;
+    height:35vh;
     width:95%;
     border: 1px solid rgb(120, 22, 38);
     border-radius: 20px;
@@ -89,7 +90,7 @@
 }
 .mainInfo{
     margin-left: 5%;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 .suhoorIfterDisplay{
     display: flex;
