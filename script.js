@@ -71,7 +71,7 @@ async function getAllTime(latitude,longitude){
   document.querySelector(".dayLength").innerHTML=data.results.day_length;
   document.querySelector(".suhoorTime").innerHTML=data.results.first_light;
   document.querySelector(".ifterTime").innerHTML=data.results.sunset;
-  
+  ifterTime=parseTimeString(data.results.sunset);
 
 }
 function arabicDate(){
@@ -94,6 +94,23 @@ async function getLocationName(latitude,longitude){
 document.querySelector(".location").addEventListener('click',async()=>{
   getLocation();
 })
+
+ function checkAlarm() {
+    currentTime = new Date();
+    if (currentTime.getHours() === ifterTime.getHours() &&
+        currentTime.getMinutes() === ifterTime.getMinutes() &&
+        currentTime.getSeconds() === ifterTime.getSeconds()) {
+      document.getElementById('alarmSound').play();
+    } 
+  remainingTimeDisplay.innerHTML=calculateTimeDifference(currentTime,ifterTime);
+  }
+  
+  function startAlarmCheck() {
+    setInterval(checkAlarm, 1000);
+  }
+
+
+
 // Call the function to display the Arabic date in Bangla
 // Call the function to display the Arabic date in Bangla
  // Call the function to display the Arabic date in Bangla
@@ -146,7 +163,7 @@ document.querySelector(".location").addEventListener('click',async()=>{
 //     let response = await fetch(fullUrl);
 //     let data = await response.json();
 //     ifterTimeDisplay.innerHTML=data.results.sunset; 
-//     ifterTime=parseTimeString(data.results.sunset);
+//     
 //     startAlarmCheck();
 //   } catch (error) {
 //     console.error(error);
@@ -155,23 +172,23 @@ document.querySelector(".location").addEventListener('click',async()=>{
 // console.log(" i get data from local storage ");
 // }
 
-// function parseTimeString(timeString) {
-//   // Split the time string by colon and AM/PM
-//   const [time, modifier] = timeString.split(/(?=[AP]M)/);
-//   let [hours, minutes, seconds] = time.split(':');
+function parseTimeString(timeString) {
+  // Split the time string by colon and AM/PM
+  const [time, modifier] = timeString.split(/(?=[AP]M)/);
+  let [hours, minutes, seconds] = time.split(':');
 
-//   // Convert hours to 24-hour format if necessary
-//   hours = (modifier === 'PM' && hours !== '12') ? parseInt(hours, 10) + 12 : hours;
-//   hours = (modifier === 'AM' && hours === '12') ? '00' : hours;
+  // Convert hours to 24-hour format if necessary
+  hours = (modifier === 'PM' && hours !== '12') ? parseInt(hours, 10) + 12 : hours;
+  hours = (modifier === 'AM' && hours === '12') ? '00' : hours;
 
-//   // Create a new Date object with the current date and parsed time
-//   const date = new Date();
-//   date.setHours(hours);
-//   date.setMinutes(minutes);
-//   date.setSeconds(seconds);
+  // Create a new Date object with the current date and parsed time
+  const date = new Date();
+  date.setHours(hours);
+  date.setMinutes(minutes);
+  date.setSeconds(seconds);
 
-//   return date;
-// }
+  return date;
+}
 
 // function checkAlarm() {
 //   currentTime = new Date();
