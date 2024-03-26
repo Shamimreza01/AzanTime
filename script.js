@@ -6,20 +6,16 @@ let remainingTimeDisplay=  document.querySelector("#remaining");
 let location_access_btn=document.querySelector(".location");
 let ifterTime;
 let currentTime;
-if(localStorage.getItem('latitude')!==null && localStorage.getItem('longitude')!==null){
+if(localStorage.getItem('latitude')!=null && localStorage.getItem('longitude')!=null){
 window.addEventListener('load', function() {
   getAllTime(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
   getLocationName(localStorage.getItem('latitude'), localStorage.getItem('longitude'));
 });
 }else{
-  window.addEventListener('load',()=>{
+  window.addEventListener('load',async ()=>{
     getLocation();
-    getAllTime(latitude,longitude);
-
   })
 }
-
-window.addEventListener('load', getCurrentTime);
 
 function getLocation(){
   if(navigator.geolocation){
@@ -59,7 +55,7 @@ function getCurrentTime() {
     arabicDate();
   }, 1000);
 }
-
+window.addEventListener('load',getCurrentTime);
 
 
 async function getAllTime(latitude,longitude){
