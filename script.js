@@ -13,22 +13,29 @@ window.addEventListener('load', function() {
 });
 }else{
   window.addEventListener('load',()=>{
-    if(navigator.geolocation){
-      navigator.geolocation.getCurrentPosition(async (position)=>{
-       let latitude=position.coords.latitude;
-       let longitude=position.coords.longitude;
-       localStorage.setItem("latitude",`${latitude}`);
-       localStorage.setItem("longitude",`${longitude}`);
-       await getAllTime(latitude,longitude);
-       await getLocationName(latitude,longitude);
-      },
-      (error)=>{
-        console.log(error);
-      })
-    }
+    getLocation();
+    getAllTime(latitude,longitude);
+
   })
 }
+
 window.addEventListener('load', getCurrentTime);
+
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(async (position)=>{
+     let latitude=position.coords.latitude;
+     let longitude=position.coords.longitude;
+     localStorage.setItem("latitude",`${latitude}`);
+     localStorage.setItem("longitude",`${longitude}`);
+     await getAllTime(latitude,longitude);
+     await getLocationName(latitude,longitude);
+    },
+    (error)=>{
+      console.log(error);
+    })
+  }
+}
 
 function getCurrentTime() {
   setInterval(() => {
@@ -60,14 +67,14 @@ async function getAllTime(latitude,longitude){
   let response=await fetch(fullUrl);
   let data=await response.json();
   console.log(data);
-  document.querySelector(".sunrise").innerHTML+=data.results.sunrise;
-  document.querySelector(".sunset").innerHTML+=data.results.sunset;
-  document.querySelector(".firstLight").innerHTML+=data.results.first_light;
-  document.querySelector(".dhuhr").innerHTML+=data.results.solar_noon;
-  document.querySelector(".isha").innerHTML+=data.results.last_light;
-  document.querySelector(".dayLength").innerHTML+=data.results.day_length;
-  document.querySelector(".suhoorTime").innerHTML+=data.results.first_light;
-  document.querySelector(".ifterTime").innerHTML+=data.results.sunset;
+  document.querySelector(".sunrise").innerHTML=data.results.sunrise;
+  document.querySelector(".sunset").innerHTML=data.results.sunset;
+  document.querySelector(".firstLight").innerHTML=data.results.first_light;
+  document.querySelector(".dhuhr").innerHTML=data.results.solar_noon;
+  document.querySelector(".isha").innerHTML=data.results.last_light;
+  document.querySelector(".dayLength").innerHTML=data.results.day_length;
+  document.querySelector(".suhoorTime").innerHTML=data.results.first_light;
+  document.querySelector(".ifterTime").innerHTML=data.results.sunset;
   
 
 }
@@ -85,9 +92,12 @@ async function getLocationName(latitude,longitude){
   let response=await fetch(url);
   let data= await response.json();
   console.log(data.results);
-  document.querySelector(".locationDisplay").textContent=`${data.results[0].county}, ${data.results[0].city}  ${data.results[0].address_line1}`;
+  document.querySelector(".locationText").textContent=`${data.results[0].county}, ${data.results[0].city}  ${data.results[0].address_line1}`;
 }
 
+document.querySelector(".location").addEventListener('click',async()=>{
+  getLocation();
+})
 // Call the function to display the Arabic date in Bangla
 // Call the function to display the Arabic date in Bangla
  // Call the function to display the Arabic date in Bangla

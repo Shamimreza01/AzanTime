@@ -9,7 +9,15 @@
 </head>
 <body>
   <div class="container">
-    <div class="search"> <div type="text" class="locationDisplay"> </div> <div class="location"> <i class="fa-solid fa-location-crosshairs"></i></div></div>
+    <div class="search"> 
+      <div type="text" class="locationDisplay">
+        <marquee scrollamount="3"> 
+          <div class="locationText"></div>
+        </marquee> 
+      </div>
+      <div class="location"> <i class="fa-solid fa-location-crosshairs"></i>
+      </div>
+    </div>
 
    <div class="currentDateTimeContainer">
     <div class="currentDateTime"> 
@@ -27,12 +35,12 @@
         <div class="img"></div>
         <div class="verticle"></div>
         <div class="mainInfo">
-          <div class="sunrise">Sunrise : </div>
-          <div class="sunset">Sunset : </div>
-          <div class="firstLight">Suhoor : </div>
-          <div class="dhuhr">Dhuhr : </div>
-          <div class="isha">Isha : </div>
-          <div class="dayLength">Day length : </div>
+          <div class="sunriseDisplay">Sunrise : <span class="sunrise"></span></div>
+          <div class="sunsetDisplay">Sunset : <span class="sunset"></span></div>
+          <div class="firstLightDisplay">Suhoor : <span class="firstLight"></span></div>
+          <div class="dhuhrDisplay">Dhuhr : <span class="dhuhr"></span></div>
+          <div class="ishaDisplay">Isha : <span class="isha"></span></div>
+          <div class="dayLengthDisplay">Day length : <span class="dayLength"></span></div>
         </div>
       </div>
     </div>
